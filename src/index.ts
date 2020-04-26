@@ -1,5 +1,6 @@
-import { settings, Application, PRECISION, Loader } from "pixi.js";
+import { settings, Application, PRECISION } from "pixi.js";
 import { Main } from "./Main";
+import Stats from "stats.js";
 
 // Two constants to represent the ideal size of the game
 export const WIDTH = 1024;
@@ -25,13 +26,11 @@ const app = new Application({
 document.getElementById("pixi-content").style.background = "#000000"; //This color will be the one you see if you need to scale your game via CSS
 document.getElementById("pixi-content").appendChild(app.view);
 
-//Add assets: .add() as many as you want. Call .load() once.
-Loader.shared.add("logo", "./img/logo.png");
-Loader.shared.onComplete.once(() => {
-	//after we have our assets loaded, we launch our Main
-	app.stage.addChild(new Main());
-});
-Loader.shared.load();
+const stats = new Stats();
+document.body.appendChild(stats.dom);
+app.ticker.add(stats.update, stats);
+
+app.stage.addChild(new Main());
 
 //Add some events to handle resizing correctly
 document.body.onload = () => {

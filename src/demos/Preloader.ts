@@ -59,6 +59,7 @@ export class Preloader extends Container {
 		"dragon/mecha_1002_101d_show/mecha_1002_101d_show_tex.png",
 
 		// for InverseKinematics && PerformanceTest
+		"dragon/mecha_1406/mecha_1406_ske.dbbin",
 		"dragon/mecha_1406/mecha_1406_ske.json",
 		"dragon/mecha_1406/mecha_1406_tex.json",
 		"dragon/mecha_1406/mecha_1406_tex.png",
@@ -74,9 +75,7 @@ export class Preloader extends Container {
 		"dragon/effect/effect_sd_tex.png",
 
 		// for ReplaceSkins
-		"dragon/you_xin/body/body_ske.json",
-		"dragon/you_xin/body/body_tex.json",
-		"dragon/you_xin/body/body_tex.png",
+		...Preloader.assetsForReplaceSkin(), //too complex and long to put here
 
 		// for ReplaceSlotDisplay
 		"dragon/mecha_1004d_show/mecha_1004d_show_ske.json",
@@ -125,12 +124,69 @@ export class Preloader extends Container {
 		const detach = Loader.shared.onProgress.add(this.onProgress, this);
 		Loader.shared.onComplete.once(() => {
 			Loader.shared.onProgress.detach(detach);
+
 			this.onComplete();
 		});
 
 		Loader.shared.load();
+		this._armatureDisplay.animation.play("idle");
 	}
 	onProgress(loader: Loader) {
 		this._armatureDisplay.animation.gotoAndStopByProgress("idle", loader.progress / 100);
+	}
+
+	private static assetsForReplaceSkin(): string[] {
+		const _suitConfigs = [];
+		_suitConfigs.push([
+			"2010600a",
+			"2010600a_1",
+			"20208003",
+			"20208003_1",
+			"20208003_2",
+			"20208003_3",
+			"20405006",
+			"20509005",
+			"20703016",
+			"20703016_1",
+			"2080100c",
+			"2080100e",
+			"2080100e_1",
+			"20803005",
+			"2080500b",
+			"2080500b_1",
+		]);
+
+		_suitConfigs.push([
+			"20106010",
+			"20106010_1",
+			"20208006",
+			"20208006_1",
+			"20208006_2",
+			"20208006_3",
+			"2040600b",
+			"2040600b_1",
+			"20509007",
+			"20703020",
+			"20703020_1",
+			"2080b003",
+			"20801015",
+		]);
+
+		const _resources = [];
+		_resources.push("dragon/you_xin/body/body_ske.json", "dragon/you_xin/body/body_tex.json", "dragon/you_xin/body/body_tex.png");
+
+		for (let i = 0, l = _suitConfigs.length; i < l; ++i) {
+			for (const partArmatureName of _suitConfigs[i]) {
+				// dragon/you_xin/suit1/2010600a/xxxxxx
+				const path = "dragon/you_xin/" + "suit" + (i + 1) + "/" + partArmatureName + "/" + partArmatureName;
+				const dragonBonesJSONPath = path + "_ske.json";
+				const textureAtlasJSONPath = path + "_tex.json";
+				const textureAtlasPath = path + "_tex.png";
+				//
+				_resources.push(dragonBonesJSONPath, textureAtlasJSONPath, textureAtlasPath);
+			}
+		}
+
+		return _resources;
 	}
 }
