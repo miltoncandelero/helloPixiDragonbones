@@ -1,0 +1,30 @@
+{
+  //Hold your mouse for a while on top of any word and you will get a nice description (VSCode)
+  "compilerOptions": {
+    //Build dir
+    "outDir": "./build/",
+    //Rules
+    "strict": true, //This turns on a lot of things, I disable two because I don't like them
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    // Output and other settings
+    "sourceMap": true, //Makes debugging waaay easier
+    "module": "ESNext", //Doesn't really mean anything. This is if you are making a library
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "target": "es5", //es5 = Internet Explorer and Everybody else. es6 = Everybody but Internet Explorer.
+    // "downlevelIteration": true, //This is said to cause really really ugly code. Only enable it if you can't find a better way.
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+  ]
+}
