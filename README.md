@@ -2,6 +2,7 @@
 *(Also known as: How to use Dragonbones with Pixi5 and Webpack without going insane)*
 
 [![For added shock](blackmagic.gif)]
+*(Internet explorer for dramatic purposes)*
 
 ## This is meant to be used with Yarn 🐱 
 *(however you should be able to use npm)*
