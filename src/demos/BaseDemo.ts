@@ -1,5 +1,6 @@
 import { Container, Sprite, Text } from "pixi.js";
 import { WIDTH, HEIGHT } from "..";
+import dragonBones from "../lib/dragonBones";
 
 export abstract class BaseDemo extends Container {
 	protected readonly _background: Sprite = Sprite.from("dragon/background.png");
@@ -7,6 +8,7 @@ export abstract class BaseDemo extends Container {
 
 	public constructor() {
 		super();
+		dragonBones.PixiFactory.factory.clear();
 
 		this.x = this.stageWidth * 0.5;
 		this.y = this.stageHeight * 0.5;
