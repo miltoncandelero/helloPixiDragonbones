@@ -1,8 +1,8 @@
 {
-  "name": "hellopixi",
+  "name": "hellopixidragonbones",
   "version": "1.0.0",
   "license": "MIT",
-  "description": "Yet another boilerplate for pixi on typescript",
+  "description": "The examples of pixi dragonbones running in a webpack build",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",

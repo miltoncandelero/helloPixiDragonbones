@@ -1,12 +1,17 @@
-# Hello Pixi
-*(Yet another PixiJS + Typescript + Webpack boilerplate)*
+# Hello Pixi Dragonbones
+*(Also known as: How to use Dragonbones with Pixi5 and Webpack without going insane)*
+
+[![For added shock](blackmagic.gif)]
 
 ## This is meant to be used with Yarn 🐱 
 *(however you should be able to use npm)*
 
 ### This boilerplate includes:
 - PixiJS v5 *(the thing you came for)*
+- DragonBones *(the other thing you came for)*
 - Typescript *(making javascript a better place)*
+- stats.js *(to know how fast are you going)*
+- dat.gui *(to make the cool demo selector)*
 - Webpack *(will make all your code into an ugly ball)*
   - Webpack Dev Server *(will host said ugly ball to debug locally)*
   - HTML Webpack Plugin *(will help your code have an index.html)* 
@@ -37,22 +42,16 @@ Finally, try `yarn run lint` to make your code look prettier.
 
 ---
 
-*I tried to leave comments in every configuration file to shed some insight about my mad programmer head. Don't be afraid to poke around the configuration files*
+## Major things I learnt:
 
-## Recommended VSCode extensions:
-- ESLint *(to have VSCode tell you how ugly your code is)*
-  - **AVOID THE PRETTIER EXTENSION!** I made Prettier work through ESLint, having a prettier extension will make ESLint go bananas.
-- IntelliCode *(like your phone autocomplete but for your code)*
-- TS/JS postfix completion *(some cool shortcuts and templates)*
-- Git Graph *(turns vscode into a mean git machine)*
-- IP Address *(shows your local ip address making it easy to share what you are testing in a lan environment like an office.)*
-- Comments in Typescript *(create automatic comment blocks when you hit `/**`)*
+* Force Webpack to create a `PIXI` global object with this simple trick: `new webpack.ProvidePlugin({ PIXI: 'pixi.js' }),`.
+* Original examples used a manually created (and deprecated) `WebGLRenderer`. This uses the integrated renderer in Pixi's `App`.
+* Some animations names are reused. `dragonBones.PixiFactory.factory.clear()` will reset the factory allowing for clean loading of the samples.
+* For some strange reason, even if you have all the assets preloaded, if you try to render a mesh deforming animation immediately after creation you will crash. Wait a bit and then `addChild` it.
+* Somehow, someway, this works in Internet Explorer. I don't know what kind of black magic is this.
 
-## Things I considered but ultimately left out
-- Tweens (tween.js)
-- Webfont Loader (webfontloader)
-- Pixi-Sound (pixi-sound)
-- Atlas Packer (free-tex-packer)
-- Code Minifer / Uglifier (terser-webpack)
-- Image compressor (imagemin)
-- Stats (gstats)
+---
+
+## Demo Files
+The demo files are the one provided by the dragonbones repo.  
+Copyright (c) 2012-2018 The DragonBones team and other contributors.  
