@@ -1,5 +1,6 @@
 import { settings, Application, PRECISION } from "pixi.js";
-import { Main } from "./Main";
+//import { Main } from "./Main";
+import { Spiner } from "./Spiner";
 import Stats from "stats.js";
 
 // Two constants to represent the ideal size of the game
@@ -30,7 +31,8 @@ const stats = new Stats();
 document.body.appendChild(stats.dom);
 app.ticker.add(stats.update, stats);
 
-app.stage.addChild(new Main());
+//app.stage.addChild(new Main());
+app.stage.addChild(new Spiner());
 
 //Add some events to handle resizing correctly
 document.body.onload = () => {

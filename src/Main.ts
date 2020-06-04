@@ -1,5 +1,5 @@
 import { Container } from "pixi.js";
-import { Preloader } from "./demos/Preloader";
+import { Preloader } from "./core/Preloader";
 import dat from "dat.gui";
 import { HelloDragonBones } from "./demos/HelloDragonBones";
 import { AnimationBase } from "./demos/AnimationBase";
@@ -29,12 +29,13 @@ export class Main extends Container {
 		this.removeChild(this.preloader);
 		this.preloader.destroy({ children: true });
 
-		const gui = new dat.GUI();
+		const gui = new dat.GUI({ closed : true });
 		gui.add(this, "helloDragonBones");
 		gui.add(this, "animationBase");
 		gui.add(this, "dragonBonesEvent");
 		gui.add(this, "animationLayer");
 		gui.add(this, "boneOffset");
+		gui.add(this, "inverseKinematics");
 		gui.add(this, "inverseKinematics");
 		gui.add(this, "boundingBox");
 		gui.add(this, "multiTextureAltas");

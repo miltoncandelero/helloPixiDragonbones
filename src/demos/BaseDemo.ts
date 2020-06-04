@@ -24,7 +24,7 @@ export abstract class BaseDemo extends Container {
 		this.addChild(text);
 
 		return text;
-	}
+  }
 
 	public get stageWidth(): number {
 		return WIDTH;
@@ -32,5 +32,5 @@ export abstract class BaseDemo extends Container {
 
 	public get stageHeight(): number {
 		return HEIGHT;
-	}
+  }
 }

@@ -9,7 +9,7 @@
     "strictNullChecks": false,
     "noImplicitReturns": true,
     "noUnusedParameters": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noFallthroughCasesInSwitch": true,
     // Output and other settings
     "sourceMap": true, //Makes debugging waaay easier

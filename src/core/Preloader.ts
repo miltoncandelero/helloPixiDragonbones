@@ -2,10 +2,23 @@ import { Container, Loader, LoaderResource } from "pixi.js";
 import dragonBones from "../lib/dragonBones";
 import { WIDTH, HEIGHT } from "..";
 
+window.PIXI = PIXI;
+import "../lib/pixi-spine";
+
 export class Preloader extends Container {
 	private _armatureDisplay: dragonBones.PixiArmatureDisplay;
 
 	private preloader: Loader;
+
+	private allSpineFiles = [
+		"spine/alien-ess.json",
+		"spine/alien-pro.json",
+		"spine/raptor-ess.json",
+		"spine/raptor-pro.json",
+		"spine/goblins.json",
+		"spine/dragon.json",
+		"spine/spineboy-pro.json",
+  ];
 
 	private allDragonBonesFiles = [
 		// for AnimationBase
@@ -14,36 +27,36 @@ export class Preloader extends Container {
 		"dragon/progress_bar/progress_bar_tex.png",
 
 		// for AnimationLayer & DragonBonesEvents
-		"dragon/mecha_1004d/mecha_1004d_ske.json",
-		"dragon/mecha_1004d/mecha_1004d_tex.json",
-		"dragon/mecha_1004d/mecha_1004d_tex.png",
+	//	"dragon/mecha_1004d/mecha_1004d_ske.json",
+	//	"dragon/mecha_1004d/mecha_1004d_tex.json",
+	//	"dragon/mecha_1004d/mecha_1004d_tex.png",
 
 		// for BaseDemo
 		"dragon/background.png",
 
 		// for BoneOffset
-		"dragon/bullet_01/bullet_01_ske.json",
-		"dragon/bullet_01/bullet_01_tex.json",
-		"dragon/bullet_01/bullet_01_tex.png",
+	//	"dragon/bullet_01/bullet_01_ske.json",
+	//	"dragon/bullet_01/bullet_01_tex.json",
+	//	"dragon/bullet_01/bullet_01_tex.png",
 
 		// for BoundingBox and ReplaceAnimation
-		"dragon/mecha_2903/mecha_2903_ske.json",
-		"dragon/mecha_2903/mecha_2903_tex.json",
-		"dragon/mecha_2903/mecha_2903_tex.png",
-		"dragon/bounding_box_tester/bounding_box_tester_ske.json",
-		"dragon/bounding_box_tester/bounding_box_tester_tex.json",
-		"dragon/bounding_box_tester/bounding_box_tester_tex.png",
+	//	"dragon/mecha_2903/mecha_2903_ske.json",
+	//	"dragon/mecha_2903/mecha_2903_tex.json",
+	//	"dragon/mecha_2903/mecha_2903_tex.png",
+	//	"dragon/bounding_box_tester/bounding_box_tester_ske.json",
+	//	"dragon/bounding_box_tester/bounding_box_tester_tex.json",
+	//	"dragon/bounding_box_tester/bounding_box_tester_tex.png",
 
 		// for CoreElement
-		"dragon/mecha_1502b/mecha_1502b_ske.json",
-		"dragon/mecha_1502b/mecha_1502b_tex.json",
-		"dragon/mecha_1502b/mecha_1502b_tex.png",
-		"dragon/skin_1502b/skin_1502b_ske.json",
-		"dragon/skin_1502b/skin_1502b_tex.json",
-		"dragon/skin_1502b/skin_1502b_tex.png",
-		"dragon/weapon_1000/weapon_1000_ske.json",
-		"dragon/weapon_1000/weapon_1000_tex.json",
-		"dragon/weapon_1000/weapon_1000_tex.png",
+	//	"dragon/mecha_1502b/mecha_1502b_ske.json",
+	//	"dragon/mecha_1502b/mecha_1502b_tex.json",
+	//	"dragon/mecha_1502b/mecha_1502b_tex.png",
+	//	"dragon/skin_1502b/skin_1502b_ske.json",
+	//	"dragon/skin_1502b/skin_1502b_tex.json",
+	//	"dragon/skin_1502b/skin_1502b_tex.png",
+	//	"dragon/weapon_1000/weapon_1000_ske.json",
+	//	"dragon/weapon_1000/weapon_1000_tex.json",
+	//	"dragon/weapon_1000/weapon_1000_tex.png",
 
 		// for EyeTracking
 		"dragon/shizuku/shizuku_ske.json",
@@ -59,31 +72,31 @@ export class Preloader extends Container {
 		"dragon/mecha_1002_101d_show/mecha_1002_101d_show_tex.png",
 
 		// for InverseKinematics && PerformanceTest
-		"dragon/mecha_1406/mecha_1406_ske.dbbin",
-		"dragon/mecha_1406/mecha_1406_ske.json",
-		"dragon/mecha_1406/mecha_1406_tex.json",
-		"dragon/mecha_1406/mecha_1406_tex.png",
-		"dragon/floor_board/floor_board_ske.json",
-		"dragon/floor_board/floor_board_tex.json",
-		"dragon/floor_board/floor_board_tex.png",
+	//	"dragon/mecha_1406/mecha_1406_ske.dbbin",
+	//	"dragon/mecha_1406/mecha_1406_ske.json",
+	//	"dragon/mecha_1406/mecha_1406_tex.json",
+	//	"dragon/mecha_1406/mecha_1406_tex.png",
+	//	"dragon/floor_board/floor_board_ske.json",
+	//	"dragon/floor_board/floor_board_tex.json",
+	//	"dragon/floor_board/floor_board_tex.png",
 
 		// for MultiTextureAtlas
-		"dragon/effect/effect_ske.json",
-		"dragon/effect/effect_tex.json",
-		"dragon/effect/effect_tex.png",
-		"dragon/effect/effect_sd_tex.json",
-		"dragon/effect/effect_sd_tex.png",
+	//	"dragon/effect/effect_ske.json",
+	//	"dragon/effect/effect_tex.json",
+	//	"dragon/effect/effect_tex.png",
+	//	"dragon/effect/effect_sd_tex.json",
+	//	"dragon/effect/effect_sd_tex.png",
 
 		// for ReplaceSkins
-		...Preloader.assetsForReplaceSkin(), //too complex and long to put here
+	//	...Preloader.assetsForReplaceSkin(), //too complex and long to put here
 
 		// for ReplaceSlotDisplay
-		"dragon/mecha_1004d_show/mecha_1004d_show_ske.json",
-		"dragon/mecha_1004d_show/mecha_1004d_show_tex.json",
-		"dragon/mecha_1004d_show/mecha_1004d_show_tex.png",
-		"dragon/weapon_1004_show/weapon_1004_show_ske.json",
-		"dragon/weapon_1004_show/weapon_1004_show_tex.json",
-		"dragon/weapon_1004_show/weapon_1004_show_tex.png",
+	//	"dragon/mecha_1004d_show/mecha_1004d_show_ske.json",
+	//	"dragon/mecha_1004d_show/mecha_1004d_show_tex.json",
+	//	"dragon/mecha_1004d_show/mecha_1004d_show_tex.png",
+	//	"dragon/weapon_1004_show/weapon_1004_show_ske.json",
+	//	"dragon/weapon_1004_show/weapon_1004_show_tex.json",
+	//	"dragon/weapon_1004_show/weapon_1004_show_tex.png",
 	];
 	private onComplete: Function;
 
@@ -120,6 +133,7 @@ export class Preloader extends Container {
 		this._armatureDisplay.y = HEIGHT / 2;
 
 		//Preloader built. Loading real assets...
+		Loader.shared.add(this.allSpineFiles);
 		Loader.shared.add(this.allDragonBonesFiles);
 		const detach = Loader.shared.onProgress.add(this.onProgress, this);
 		Loader.shared.onComplete.once(() => {
